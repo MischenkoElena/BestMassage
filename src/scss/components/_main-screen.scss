@@ -1,0 +1,16 @@
+.main-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .info {
+    position: relative;
+    z-index: 10;
+  }
+}
+
+#canvas {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}

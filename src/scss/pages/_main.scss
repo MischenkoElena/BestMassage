@@ -1,0 +1,36 @@
+#wrapper {
+  .menu {
+    cursor: pointer;
+    padding: 5px 8px;
+    color: #fff;
+    font-size: 18px;
+    border: 1px solid #fff;
+    background-color: transparent;
+    text-align: center;
+    text-transform: uppercase;
+    transition: background-color 0.8s, color 0.8s;
+    &:hover {
+      background-color: #fff;
+      color: #555;
+    }
+  }
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  padding: 10px 30px;
+  background: rgba(#000, 0.8);
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    position: relative;
+    top: 5px;
+    width: 150px;
+  }
+}
