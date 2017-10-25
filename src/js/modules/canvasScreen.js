@@ -7,91 +7,78 @@ let canvas = (function() {
   sepiaCanvas.height = sepiaWrapper.height();
   ctx.filter = 'sepia(100%)';
   let imageW, imageH, imageProportion, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight,
-    kScale = 1.5, deltaScale = 0, deltaTranslateX = 0, deltaTranslateY = 0, deltaImageW, deltaImageH, direction = 1;
-  let requestId,
-    baseImage = new Image(),
-    baseImageNew = new Image(),
-    newBaseImageNum = 1, baseImageCount = $sepiaCanvas.data('images-count') - 1;
-  baseImage.src = $sepiaCanvas.data('image-src0');
-  let animationInterval, fadePct = 0;
+    kScale = 1.4, deltaScale = 0, deltaTranslateX = 0, deltaTranslateY = 0, deltaImageW, deltaImageH, direction = 1;
+  let requestIdDraw, requestIdFade,
+    imagesArr = [],
+    baseImagesArr = [],
+    newBaseImageNum = 0, baseImageCount = $sepiaCanvas.data('images-count') - 1;
+  let animationInterval, fadePct = 0, scale;
 
-  if (baseImageCount > 0) {
-    baseImageNew.src = $sepiaCanvas.data('image-src' + newBaseImageNum);
-    console.log('animateFade stop', newBaseImageNum, baseImage.src, baseImageNew.src);
+  for (let i = 0; i <= baseImageCount; i++) {
+    let image = new Image();
+    image.src = $sepiaCanvas.data('image-src' + i);
+    baseImagesArr.push(image);
+    addImage(image);
   }
 
-  function addImage() {
-    baseImage.onload = function () {
-      imageW = baseImage.width;
-      imageH = baseImage.height;
-      imageProportion = imageW / imageH;
-      deltaImageW = imageW / 10000;
-      deltaImageH = imageH / 10000;
-      sx = 0;
-      sy = 0;
-      sWidth = imageW;
-      sHeight = imageH;
-      dWidth = sepiaCanvas.width*kScale;
-      dHeight = sepiaCanvas.width*kScale/imageProportion;
-      dx = sepiaCanvas.width / 2 - dWidth / 2;
-      dy = sepiaCanvas.height / 2 - dHeight / 2;
-      // ctx.drawImage(image, 0, 0, sWidth, sHeight, dx, dy, dWidth, dHeight);
-      // clearInterval(animationInterval);
-      animate();
+  function setInitialValuesForDrawing(image) {
+    imageW = image.width;
+    imageH = image.height;
+    imageProportion = imageW / imageH;
+    deltaImageW = imageW / 10000;
+    deltaImageH = imageH / 10000;
+    sx = 0;
+    sy = 0;
+    sWidth = imageW;
+    sHeight = imageH;
+    dWidth = sepiaCanvas.width*kScale;
+    dHeight = sepiaCanvas.width*kScale/imageProportion;
+    dx = sepiaCanvas.width / 2 - dWidth / 2;
+    dy = sepiaCanvas.height / 2 - dHeight / 2;
+  }
+
+  function addImage(image) {
+    image.onload = function () {
+      imagesArr.push(image);
+      setInitialValuesForDrawing(image);
+      if (imagesArr.length === baseImagesArr.length) {
+        newBaseImageNum = imagesArr.length - 1;
+        animate();
+      }
     };
   }
 
   function animate() {
     animationInterval = setInterval(function () {
       requestAnimationFrame(draw);
-      // console.log('draw');
-    }, 1000 / 40);
+    }, 1000 / 60);
   }
 
   function animateFade() {
-    if (fadePct > 100) {
-      setTimeout(() => {
-        window.cancelAnimationFrame(requestId);
-        requestId = undefined;
-      }, 0);
-      baseImage = baseImageNew;
+    ctx.globalAlpha = fadePct;
+    ctx.drawImage(imagesArr[newBaseImageNum], 0, 0, sWidth, sHeight, dx, dy, dWidth, dHeight);
+    if (fadePct < 1) {
+      fadePct += 0.02;
+      requestIdFade = requestAnimationFrame(animateFade);
+    } else {
+      // setTimeout(() => {
+        window.cancelAnimationFrame(requestIdFade);
+        requestIdFade = undefined;
+      // }, 0);
       animate();
-      if (newBaseImageNum < baseImageCount) {
-        baseImageNew.src = $sepiaCanvas.data('image-src' + newBaseImageNum);
-        newBaseImageNum++;
-      } else {
-        newBaseImageNum = 0;
-      }
-      console.log('animateFade stop', newBaseImageNum, baseImage.src, baseImageNew.src);
-      return;
     }
-    requestId = window.requestAnimationFrame(animateFade);
-    //            ctx.clearRect(0,0,canvas.width,canvas.height);
-    // fadeDraw(baseImage, fadePct / 100);
-    // fadeDraw(baseImageNew, (1 - fadePct / 100));
-    fadePct += 20;
   }
-
-  function fadeDraw(img, opacity) {
-    console.log(opacity);
-    ctx.save();
-    ctx.globalAlpha = opacity;
-    ctx.drawImage(img, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
-    // ctx.drawImage(img, 0, 0);
-    ctx.restore();
-  }
-
 
   function draw() {
     ctx.clearRect(0, 0,sepiaCanvas.width, sepiaCanvas.height);
     ctx.save();
-    let scale = Math.abs(Math.sin(deltaScale)) / 5 + 1;
+    scale = Math.abs(Math.sin(deltaScale)) / 5 + 1;
     // let scale = 1;
     let trltX = deltaTranslateX;
     let trltY = 0;
     ctx.translate(trltX, trltY);
     ctx.scale(scale, scale);
-    ctx.drawImage(baseImage, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+    ctx.drawImage(imagesArr[newBaseImageNum], sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
     deltaScale += 0.002;
     if (deltaTranslateX <= Math.abs(dx) && direction) {
       deltaTranslateX += deltaImageW;
@@ -105,12 +92,20 @@ let canvas = (function() {
     if (Math.abs(deltaTranslateX - dx / scale) < 5) {
       direction = 1;
       clearInterval(animationInterval);
+      setTimeout(() => {
+        window.cancelAnimationFrame(requestIdDraw);
+        requestIdDraw = undefined;
+      }, 0);
+      newBaseImageNum = (newBaseImageNum) ? newBaseImageNum - 1 : imagesArr.length - 1;
+      deltaScale = 0;
+      deltaTranslateX = 0;
+      deltaTranslateY = 0;
+      deltaImageW = 0;
+      deltaImageH = 0;
+      setInitialValuesForDrawing(imagesArr[newBaseImageNum]);
       fadePct = 0;
+      console.log(newBaseImageNum);
       animateFade();
-      // setTimeout(() => {
-      //   window.cancelAnimationFrame(requestId);
-      //   requestId = undefined;
-      // }, 0);
     }
     deltaTranslateY += deltaImageH;
     ctx.restore();
@@ -126,11 +121,10 @@ let canvas = (function() {
     dx = sepiaCanvas.width / 2 - dWidth / 2;
     dy = sepiaCanvas.height / 2 - dHeight / 2;
     ctx.filter = 'sepia(100%)';
-    ctx.drawImage(baseImage, 0, 0, sWidth, sHeight, dx, dy, dWidth, dHeight);
+    ctx.drawImage(imagesArr[newBaseImageNum], 0, 0, sWidth, sHeight, dx, dy, dWidth, dHeight);
   }
 
   function init() {
-    addImage();
     $(window).on('resize', ()=>{
       redrawImage();
     });
