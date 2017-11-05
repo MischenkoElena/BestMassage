@@ -1,3 +1,46 @@
 .contacts {
   background-color: $sepiaColor;
+  h1 {
+    color: #fff;
+  }
+}
+
+.contacts-inner {
+  display: flex;
+  align-content: space-around;
+  justify-content: center;
+
+  .contact-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    line-height: 1.5;
+    color: #fff;
+
+    dt {
+      font-size: 24px;
+    }
+
+    dd {
+      display: block;
+      font-size: 28px;
+    }
+
+    a, a:active, a:visited {
+      color: #fff;
+      text-decoration: none;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+  }
+}
+
+
+#map {
+  width: 50%;
+  height: 70vh;
+  border: 1px solid rgba(197, 198, 198, 0.5);
 }

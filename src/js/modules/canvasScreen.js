@@ -1,24 +1,35 @@
 let canvas = (function() {
-  let sepiaCanvas = document.getElementById('canvas'),
-    $sepiaCanvas = $(sepiaCanvas),
-    sepiaWrapper = $('.main-screen');
-  let ctx = sepiaCanvas.getContext('2d');
-  sepiaCanvas.width = sepiaWrapper.width();
-  sepiaCanvas.height = sepiaWrapper.height();
-  ctx.filter = 'sepia(100%)';
+  let sepiaCanvas,
+    $sepiaCanvas,
+    sepiaWrapper;
+  let ctx;
   let imageW, imageH, imageProportion, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight,
     kScale = 1.4, deltaScale = 0, deltaTranslateX = 0, deltaTranslateY = 0, deltaImageW, deltaImageH, direction = 1;
   let requestIdDraw, requestIdFade,
     imagesArr = [],
     baseImagesArr = [],
-    newBaseImageNum = 0, baseImageCount = $sepiaCanvas.data('images-count') - 1;
+    newBaseImageNum = 0, baseImageCount;
   let animationInterval, fadePct = 0, scale;
 
-  for (let i = 0; i <= baseImageCount; i++) {
-    let image = new Image();
-    image.src = $sepiaCanvas.data('image-src' + i);
-    baseImagesArr.push(image);
-    addImage(image);
+  function initCanvas() {
+    sepiaCanvas = document.getElementById('canvas');
+
+    if (!sepiaCanvas) return false;
+
+    $sepiaCanvas = $(sepiaCanvas);
+    sepiaWrapper = $('.main-screen');
+    ctx = sepiaCanvas.getContext('2d');
+    sepiaCanvas.width = sepiaWrapper.width();
+    sepiaCanvas.height = sepiaWrapper.height();
+    ctx.filter = 'sepia(100%)';
+    baseImageCount = $sepiaCanvas.data('images-count') - 1;
+
+    for (let i = 0; i <= baseImageCount; i++) {
+      let image = new Image();
+      image.src = $sepiaCanvas.data('image-src' + i);
+      baseImagesArr.push(image);
+      addImage(image);
+    }
   }
 
   function setInitialValuesForDrawing(image) {
@@ -62,8 +73,8 @@ let canvas = (function() {
       requestIdFade = requestAnimationFrame(animateFade);
     } else {
       // setTimeout(() => {
-        window.cancelAnimationFrame(requestIdFade);
-        requestIdFade = undefined;
+      window.cancelAnimationFrame(requestIdFade);
+      requestIdFade = undefined;
       // }, 0);
       animate();
     }
@@ -125,13 +136,30 @@ let canvas = (function() {
   }
 
   function init() {
+    initCanvas();
     $(window).on('resize', ()=>{
       redrawImage();
     });
   }
 
+  function play() {
+    if (!sepiaCanvas) return false;
+    animate();
+    console.log('play');
+  }
+
+  function pause() {
+    if (!sepiaCanvas) return false;
+    clearInterval(animationInterval);
+    window.cancelAnimationFrame(requestIdDraw);
+    requestIdDraw = undefined;
+    console.log('pause');
+  }
+
   return {
-    init: init
+    init: init,
+    pause: pause,
+    play: play
   };
 }());
 

@@ -1,5 +1,9 @@
+.overflow {
+  overflow: hidden;
+}
+
 #wrapper {
-  .menu {
+  .menu-btn {
     cursor: pointer;
     padding: 5px 8px;
     color: #fff;
@@ -14,6 +18,26 @@
       color: #555;
     }
   }
+
+  .full-screen {
+    height: 100vh;
+    padding: 110px 30px 40px;
+  }
+
+  .section-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    max-height: calc(100% - 150px);
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-weight: 600;
+    text-align: center;
+    font-size: 48px;
+    margin: 0 0 30px;
+  }
 }
 
 header {
@@ -24,13 +48,13 @@ header {
   z-index: 100;
   display: flex;
   padding: 10px 30px;
-  background: rgba(#000, 0.8);
+  background: rgba(53, 44, 36, 0.85);
   justify-content: space-between;
   align-items: center;
 
   .logo {
     position: relative;
     top: 5px;
-    width: 150px;
+    width: 200px;
   }
 }

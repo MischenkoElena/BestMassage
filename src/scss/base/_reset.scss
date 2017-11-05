@@ -11,8 +11,21 @@ html {
 
 body {
   margin: 0;
-  font: 16px/24px 'raleway';
+  font: 16px 'elmessiri';
+  line-height: 1.5;
   min-width: 320px;
+  font-weight: 300;
+  color: #222;
+}
+
+button {
+  margin: 0;
+  font: 16px/1.5 'elmessiri';
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
 }
 
 // adaptive images

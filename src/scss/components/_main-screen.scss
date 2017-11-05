@@ -2,9 +2,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0 !important;
   .info {
     position: relative;
     z-index: 10;
+    width: 40vw;
+    text-align: center;
+    color: #fff;
+    @include media('<768px') {
+      width: 60vw;
+    }
   }
 }
 
