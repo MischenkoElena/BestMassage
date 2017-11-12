@@ -10,16 +10,17 @@
   .photo {
     display: flex;
     align-items: center;
-    width: 35%;
+    width: 30%;
     overflow: hidden;
     img {
-      border-radius: 30% 30% 40% 40%;
+      border-radius: 5%;
     }
   }
   .text {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 55%;
+    width: 60%;
+    font-size: 20px;
   }
 }

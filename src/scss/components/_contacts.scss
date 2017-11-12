@@ -1,5 +1,17 @@
 .contacts {
-  background-color: $sepiaColor;
+  height: 100vh;
+  overflow: hidden;
+  padding: 110px 30px 40px;
+  //background-color: $sepiaColor;
+  background-color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  @include media('<768px') {
+    height: auto;
+    padding: 30px 20px;
+  }
+
   h1 {
     color: #fff;
   }
@@ -7,24 +19,48 @@
 
 .contacts-inner {
   display: flex;
-  align-content: space-around;
-  justify-content: center;
+  width: 1200px;
+  align-items: center;
+  //justify-content: center;
+  @include media('<768px') {
+    flex-direction: column;
+  }
+
 
   .contact-info {
     display: flex;
-    justify-content: center;
+    //justify-content: center;
     align-items: center;
     width: 40%;
     line-height: 1.5;
     color: #fff;
+    @include media('<768px') {
+      width: 100%;
+      order: 1;
+    }
 
     dt {
       font-size: 24px;
+      font-weight: 600;
+      color: $red;
+      @include media('<1240px') {
+        font-size: 22px;
+      }
+      @include media('<1024px') {
+        font-size: 21px;
+      }
     }
 
     dd {
       display: block;
       font-size: 28px;
+      @include media('<1240px') {
+        font-size: 25px;
+      }
+      @include media('<1024px') {
+        font-size: 20px;
+        margin-left: 30px;
+      }
     }
 
     a, a:active, a:visited {
@@ -40,7 +76,13 @@
 
 
 #map {
-  width: 50%;
+  width: 60%;
   height: 70vh;
   border: 1px solid rgba(197, 198, 198, 0.5);
+  @include media('<768px') {
+    width: 100%;
+    height: 90vw;
+    max-height: 70vh;
+    order: 2;
+  }
 }

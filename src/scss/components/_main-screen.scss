@@ -9,8 +9,13 @@
     width: 40vw;
     text-align: center;
     color: #fff;
+    text-shadow: 1px 1px 0 rgba(34, 34, 34, 0.85);
     @include media('<768px') {
       width: 60vw;
+    }
+
+    .menu-btn {
+      text-shadow: 1px 1px 0 rgba(34, 34, 34, 0.85);
     }
   }
 }

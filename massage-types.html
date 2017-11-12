@@ -15,12 +15,13 @@
         <div class="logo">
             <img src="assets/images/logo_white.svg" alt="Best Massage">
         </div>
-        <button class="menu-btn">Меню</button>
+        <button class="menu-btn btn">Меню</button>
     </header>
-    <section class="category-screen">
+    <section class="categories-screen">
+        <h1>Виды массажей</h1>
+        <ul class="categories-list"></ul>
     </section>
-    <section class="contacts full-screen" data-bg="white">
-        <h1>Как нас найти</h1>
+    <section id="contacts" class="contacts" data-bg="white">
         <div class="contacts-inner">
             <div class="contact-info">
                 <dl>
@@ -29,13 +30,13 @@
                     <dt>Тел</dt>
                     <dd><a href="tel:0981726009">(098) 172-60-09</a></dd>
                     <dt>Email</dt>
-                    <dd><a href="mailto:BestMassageKh@ukr.net">BestMassageKh@ukr.net</a></dd>
+                    <dd><a target="_blank" href="mailto:BestMassageKh@ukr.net">BestMassageKh@ukr.net</a></dd>
                     <dt>Instagram</dt>
-                    <dd><a href="https://www.instagram.com/bogdan_kh_ua/">bogdan_kh_ua</a></dd>
+                    <dd><a target="_blank" href="https://www.instagram.com/bogdan_kh_ua/">bogdan_kh_ua</a></dd>
                     <dt>Facebook</dt>
-                    <dd><a href="https://www.facebook.com/BestMassageKh/">BestMassageKh</a></dd>
+                    <dd><a target="_blank" href="https://www.facebook.com/BestMassageKh/">BestMassageKh</a></dd>
                     <dt>Elmy</dt>
-                    <dd><a href="https://elmy.com/BogdanMischenko">BogdanMischenko</a></dd>
+                    <dd><a target="_blank" href="https://elmy.com/BogdanMischenko">BogdanMischenko</a></dd>
                     <dt>Адрес</dt>
                     <dd>Харьков, Чернышевская, 95</dd>
                 </dl>
@@ -50,15 +51,15 @@
                 <li><a href="/">Главная</a></li>
                 <li><a href="/massage-types.html">Виды массажей</a></li>
                 <li><a href="/discounts-and-offers.html">Акции и скидки</a></li>
-                <li class="inner-link" data-target="about"><a href="/">О нас</a></li>
+                <li class="hash-link" data-target="about"><a href="/#about">О мастере</a></li>
                 <li class="inner-link" data-target="contacts"><a href="/">Контакты</a></li>
             </ul>
             <ul class="hover-image">
-                <li><img src="assets/images/img5695.jpg" alt=""></li>
-                <li><img src="assets/images/img5694.jpg" alt=""></li>
-                <li><img src="assets/images/img5676.jpg" alt=""></li>
-                <li><img src="assets/images/img5697.jpg" alt=""></li>
-                <li><img src="assets/images/img5699.jpg" alt=""></li>
+                <li><img src="assets/images/main.jpg" alt=""></li>
+                <li><img src="assets/images/types.jpg" alt=""></li>
+                <li><img src="assets/images/discount.jpg" alt=""></li>
+                <li><img src="assets/images/about.gif" alt=""></li>
+                <li><img class="map" src="assets/images/map.jpg" alt=""></li>
             </ul>
         </div>
     </section>
@@ -66,57 +67,26 @@
 </body>
 <script>
   function initMap() {
-    var bestMassage = {lat: 50.010733, lng: 36.244962},
-      center = {lat: 50.008655, lng: 36.238995};
+    var bestMassage = {lat: 50.010636, lng: 36.244716};
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 17,
       center: bestMassage,
       styles: [
         {
-          "featureType": "administrative.locality",
-          "elementType": "labels",
           "stylers": [
             {
-              "visibility": "on"
-            }
-          ]
-        },
-        {
-          "featureType": "administrative.locality",
-          "elementType": "labels.text.fill",
-          "stylers": [
-            {
-              "color": "#000000"
+              "saturation": -100
             },
             {
-              "visibility": "on"
+              "gamma": 1
             }
           ]
         },
         {
-          "featureType": "administrative.locality",
           "elementType": "labels.text.stroke",
           "stylers": [
             {
-              "visibility": "on"
-            },
-            {
-              "color": "#ffffff"
-            },
-            {
-              "weight": "0.75"
-            }
-          ]
-        },
-        {
-          "featureType": "landscape.natural",
-          "elementType": "geometry.fill",
-          "stylers": [
-            {
-              "visibility": "on"
-            },
-            {
-              "color": "#ded7c6"
+              "visibility": "off"
             }
           ]
         },
@@ -130,61 +100,108 @@
           ]
         },
         {
+          "featureType": "poi.business",
+          "elementType": "labels.text",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.business",
+          "elementType": "labels.icon",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.place_of_worship",
+          "elementType": "labels.text",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.place_of_worship",
+          "elementType": "labels.icon",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
           "featureType": "road",
           "elementType": "geometry",
           "stylers": [
-            {
-              "lightness": 100
-            },
             {
               "visibility": "simplified"
             }
           ]
         },
         {
-          "featureType": "road",
-          "elementType": "labels",
-          "stylers": [
-            {
-              "visibility": "on"
-            }
-          ]
-        },
-        {
-          "featureType": "transit.line",
-          "elementType": "geometry",
+          "featureType": "water",
           "stylers": [
             {
               "visibility": "on"
             },
             {
-              "lightness": 700
+              "saturation": 50
+            },
+            {
+              "gamma": 0
+            },
+            {
+              "hue": "#50a5d1"
             }
           ]
         },
         {
-          "featureType": "water",
-          "elementType": "all",
+          "featureType": "administrative.neighborhood",
+          "elementType": "labels.text.fill",
           "stylers": [
             {
-              "color": "#c3a866"
+              "color": "#333333"
             }
           ]
         },
         {
-          "featureType": "water",
-          "elementType": "labels",
+          "featureType": "road.local",
+          "elementType": "labels.text",
           "stylers": [
             {
-              "visibility": "off"
+              "weight": 0.5
+            },
+            {
+              "color": "#333333"
+            }
+          ]
+        },
+        {
+          "featureType": "transit.station",
+          "elementType": "labels.icon",
+          "stylers": [
+            {
+              "gamma": 1
+            },
+            {
+              "saturation": 50
             }
           ]
         }
       ]
     });
+    var markerImage = 'assets/images/map_icon.png';
     var marker = new google.maps.Marker({
       position: bestMassage,
-      map: map
+      map: map,
+      title: 'Мы здесь!',
+      icon: markerImage
     });
   }
 </script>

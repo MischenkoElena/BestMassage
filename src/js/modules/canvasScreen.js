@@ -21,7 +21,7 @@ let canvas = (function() {
     ctx = sepiaCanvas.getContext('2d');
     sepiaCanvas.width = sepiaWrapper.width();
     sepiaCanvas.height = sepiaWrapper.height();
-    ctx.filter = 'sepia(100%)';
+    ctx.filter = 'grayscale(0.85)';
     baseImageCount = $sepiaCanvas.data('images-count') - 1;
 
     for (let i = 0; i <= baseImageCount; i++) {
@@ -55,6 +55,7 @@ let canvas = (function() {
       if (imagesArr.length === baseImagesArr.length) {
         newBaseImageNum = imagesArr.length - 1;
         animate();
+        $(window).trigger('canvasLoaded');
       }
     };
   }
@@ -131,13 +132,14 @@ let canvas = (function() {
     dHeight = sepiaCanvas.width*kScale/imageProportion;
     dx = sepiaCanvas.width / 2 - dWidth / 2;
     dy = sepiaCanvas.height / 2 - dHeight / 2;
-    ctx.filter = 'sepia(100%)';
+    ctx.filter = 'grayscale(0.85)';
     ctx.drawImage(imagesArr[newBaseImageNum], 0, 0, sWidth, sHeight, dx, dy, dWidth, dHeight);
   }
 
   function init() {
     initCanvas();
     $(window).on('resize', ()=>{
+      if (!sepiaCanvas) return false;
       redrawImage();
     });
   }

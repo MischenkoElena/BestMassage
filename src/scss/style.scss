@@ -5,7 +5,8 @@
 @import './node_modules/include-media/dist/include-media';
 
 @import 'base/main';
-@import 'pages/main';
+@import 'pages/main',
+'pages/_types';
 @import 'components/main-screen',
         'components/menu',
         'components/about',

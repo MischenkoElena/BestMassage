@@ -1,26 +1,36 @@
 let helpers = {
-   throttle : function(func, limit) {
-     let inThrottle,
-       lastFunc,
-       lastRan;
-     return function() {
-       let context = this,
-         args = arguments;
-       if (!inThrottle) {
-         func.apply(context, args);
-         lastRan = Date.now();
-         inThrottle = true;
-       } else {
-         clearTimeout(lastFunc);
-         lastFunc = setTimeout(function() {
-           if ((Date.now() - lastRan) >= limit) {
-             func.apply(context, args);
-             lastRan = Date.now();
-           }
-         }, limit - (Date.now() - lastRan));
-       }
-     };
-   }
+  throttle: function(func, wait, immediate) {
+    let timeout;
+    return function() {
+      let context = this, args = arguments;
+      let later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      let callNow = immediate && !timeout;
+      if ( !timeout ) timeout = setTimeout( later, wait );
+      if (callNow) func.apply(context, args);
+    };
+  },
+  debounce: function(func, wait, immediate) {
+    let timeout;
+    return function() {
+      let context = this, args = arguments;
+      let later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      let callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  },
+  scrollPage: function(top, duration) {
+    $('html, body').animate({
+      scrollTop: top
+    }, duration);
+  }
 };
 
 export default helpers;
