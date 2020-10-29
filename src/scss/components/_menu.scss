@@ -21,7 +21,7 @@
     right: 40px;
     background: none;
     border: none;
-    color: #fff;
+    color: $lightMint;
     transition: opacity 0.7s;
     &:hover {
       opacity: 0.8;
@@ -42,7 +42,7 @@
 
   .menu-list {
     width: 42%;
-    color: #fff;
+    color: $lightMint;
     padding: 0;
     @include media('<1024px') {
       width: 100%;
@@ -64,7 +64,7 @@
       display: block;
       padding: 2vh 10px;
       height: 100%;
-      color: #fff;
+      color: $lightMint;
       text-decoration: none;
       @include media('<768px') {
         padding: 1vh 10px;

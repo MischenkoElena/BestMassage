@@ -9,7 +9,7 @@
     @extend %listreset;
 
     li {
-      color: #fff;
+      color: $baseColor;
       border-bottom: 1px solid #666;
       @include media('<768px') {
         border-width: 2px;
@@ -96,6 +96,8 @@
     .name {
       width: 40%;
       font-size: 33px;
+      color: $link;
+
       @include media('<1240px') {
         width: 45%;
         font-size: 28px;
@@ -108,7 +110,6 @@
 
     .number {
       position: relative;
-      color: $red;
       font-size: 150px;
       margin-right: 20px;
       @include media('<1240px') {
@@ -132,7 +133,7 @@
         height: 150px;
         top: 0;
         right: 0;
-        background: $red;
+        background: $link;
         transform: rotate(30deg) translate(25px, 3px);
         @include media('<1240px') {
           transform: rotate(30deg) translate(17px, -7px);
@@ -161,10 +162,7 @@
       }
 
       &.shown {
-        max-height: 600px;
-        @include media('<1024px') {
-          max-height: 800px;
-        }
+        max-height: 900px;
         @include media('<768px') {
           max-height: 1000px;
         }
@@ -222,16 +220,13 @@
           padding: 20px 0 10px;
         }
 
-        .col {
-          width: 50%;
-        }
         span {
           display: block;
           padding-bottom: 10px;
         }
         .num {
           display: inline-block;
-          color: $red;
+          color: $link;
           padding: 0;
           font-weight: 600;
           font-size: 27px;
@@ -313,7 +308,7 @@
 
     .offers-name {
       text-align: center;
-      color: $red;
+      color: $link;
       font-size: 42px;
       line-height: 46px;
       font-weight: 600;
@@ -324,7 +319,7 @@
         font-size: 30px;
         line-height: 34px;
       }
-      }
+    }
   }
 }
 

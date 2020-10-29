@@ -51,6 +51,7 @@
     "jshint": "^2.9.4",
     "node-notifier": "^5.0.2",
     "path": "^0.12.7",
+    "picturefill": "^3.0.2",
     "run-sequence": "^1.2.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
@@ -66,8 +67,10 @@
     "start": "gulp"
   },
   "dependencies": {
+    "bootstrap-sass": "^3.3.7",
     "include-media": "~1.4.9",
     "jquery": "~2.2.4",
-    "bootstrap-sass": "^3.3.7"
+    "natives": "^1.1.6",
+    "node-sass": "^4.11.0"
   }
 }

@@ -2,54 +2,81 @@
   overflow: hidden;
 }
 
-#wrapper {
-  .btn {
-    cursor: pointer;
-    padding: 9px 8px 5px;
-    color: #fff;
-    font-size: 18px;
-    border: 1px solid #fff;
-    background-color: transparent;
-    text-align: center;
-    text-transform: uppercase;
-    transition: background-color 0.6s, color 0.6s;
-    @include media('<768px') {
-      font-size: 16px;
-      padding: 7px 8px 4px;
-    }
-      &:hover {
-      background-color: #fff;
-      color: #555;
-    }
-    &:focus {
-      outline: none;
-    }
-  }
+.scrollbar-measure {
+  width: 100px;
+  height: 100px;
+  overflow: scroll;
+  position: absolute;
+  top: -9999px;
+}
 
-  .full-screen {
-    height: 100vh;
-    overflow: hidden;
-    padding: 110px 30px 40px;
+a, a:active, a:visited {
+  color: $link;
+  text-decoration: none;
+  &:hover {
+    opacity: 0.8;
   }
+}
 
-  .section-wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    max-height: calc(100% - 150px);
-    margin: 0 auto;
+.btn {
+  cursor: pointer;
+  padding: 9px 8px 5px;
+  color: $lightMint;
+  font-size: 18px;
+  border: 1px solid $lightMint;
+  background-color: transparent;
+  text-align: center;
+  text-transform: uppercase;
+  transition: background-color 0.6s, color 0.6s;
+  @include media('<768px') {
+    font-size: 16px;
+    padding: 7px 8px 4px;
   }
+  &:hover {
+    background-color: $lightMint;
+    color: #444;
+  }
+  &:focus {
+    outline: none;
+  }
+}
 
-  h1 {
-    font-weight: 600;
-    text-align: center;
-    font-size: 48px;
-    margin: 20px 0;
-    @include media('<768px') {
-      font-size: 38px;
-      margin: 10px 0 15px;
-    }
+.full-screen {
+  height: 100vh;
+  overflow: hidden;
+  padding: 110px 30px 40px;
+  @include media('<768px') {
+    height: auto;
   }
+}
+
+.section-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  max-height: calc(100% - 150px);
+  margin: 0 auto;
+  @include media('<768px') {
+    width: 100%;
+  }
+  @include media("height<800px") {
+    max-height: 100%;
+  }
+}
+
+h1 {
+  font-weight: 600;
+  text-align: center;
+  font-size: 48px;
+  margin: 20px 0;
+  @include media('<768px') {
+    font-size: 38px;
+    margin: 10px 0 15px;
+  }
+}
+
+p, h2, h3, h4, h5, h6 {
+  margin: 0 0 15px;
 }
 
 header {
@@ -64,8 +91,9 @@ header {
   background: rgba(#222, 0.85);
   justify-content: space-between;
   align-items: center;
+
   @include media('<768px') {
-    padding: 0 10px;
+    padding: 10px;
   }
 
   .logo {

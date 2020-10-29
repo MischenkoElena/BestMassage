@@ -13,7 +13,7 @@
 <section id="wrapper">
     <header>
         <div class="logo">
-            <img src="assets/images/logo_white.svg" alt="Best Massage">
+            <a href="/"><img src="assets/images/logo_white_1.svg" alt="Best Massage"></a>
         </div>
         <button class="menu-btn btn">Меню</button>
     </header>
@@ -25,10 +25,10 @@
         <div class="contacts-inner">
             <div class="contact-info">
                 <dl>
-                    <dt>Viber</dt>
-                    <dd><a href="tel:0950118320">(095) 011-83-20</a></dd>
-                    <dt>Тел</dt>
-                    <dd><a href="tel:0981726009">(098) 172-60-09</a></dd>
+                    <dt>Тел / Viber</dt>
+                    <dd><a href="tel:0667218440">(066) 721-84-40</a></dd>
+                    <dt>Telegram</dt>
+                    <dd><a target="_blank" href="https://t.me/massagekh/">t.me/massagekh</a></dd>
                     <dt>Email</dt>
                     <dd><a target="_blank" href="mailto:BestMassageKh@ukr.net">BestMassageKh@ukr.net</a></dd>
                     <dt>Instagram</dt>
@@ -38,7 +38,8 @@
                     <dt>Elmy</dt>
                     <dd><a target="_blank" href="https://elmy.com/BogdanMischenko">BogdanMischenko</a></dd>
                     <dt>Адрес</dt>
-                    <dd>Харьков, Чернышевская, 95</dd>
+                    <dd>Харьков, Чернышевская, 90</dd>
+                    <dd>Студия массажа "М'ЯТА спина"</dd>
                 </dl>
             </div>
             <div id="map"></div>
@@ -49,9 +50,9 @@
         <div class="menu-inner">
             <ul class="menu-list">
                 <li><a href="/">Главная</a></li>
-                <li><a href="/massage-types.html">Виды массажей</a></li>
-                <li><a href="/discounts-and-offers.html">Акции и скидки</a></li>
-                <li class="hash-link" data-target="about"><a href="/#about">О мастере</a></li>
+                <li><a href="/massage-types.html">Виды и стоимость массажей</a></li>
+                <li><a href="/discounts-and-offers.html">Скидки и условия</a></li>
+                <li class="hash-link" data-target="about"><a href="/#about">Наши мастера</a></li>
                 <li class="inner-link" data-target="contacts"><a href="/">Контакты</a></li>
             </ul>
             <ul class="hover-image">
@@ -67,7 +68,7 @@
 </body>
 <script>
   function initMap() {
-    var bestMassage = {lat: 50.010636, lng: 36.244716};
+    var bestMassage = {lat: 50.010803, lng: 36.245787};
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 17,
       center: bestMassage,
@@ -196,7 +197,7 @@
         }
       ]
     });
-    var markerImage = 'assets/images/map_icon.png';
+    var markerImage = 'assets/images/Map_pin_icon.svg';
     var marker = new google.maps.Marker({
       position: bestMassage,
       map: map,

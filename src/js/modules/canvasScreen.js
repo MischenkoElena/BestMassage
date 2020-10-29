@@ -10,12 +10,16 @@ let canvas = (function() {
     baseImagesArr = [],
     newBaseImageNum = 0, baseImageCount;
   let animationInterval, fadePct = 0, scale;
+  let isMobile;
 
   function initCanvas() {
     sepiaCanvas = document.getElementById('canvas');
+    isMobile = $('body').data('scroll-width') + $(window).width() < 768;
 
     if (!sepiaCanvas) return false;
-
+    if (isMobile) {
+      return false;
+    }
     $sepiaCanvas = $(sepiaCanvas);
     sepiaWrapper = $('.main-screen');
     ctx = sepiaCanvas.getContext('2d');
@@ -55,7 +59,7 @@ let canvas = (function() {
       if (imagesArr.length === baseImagesArr.length) {
         newBaseImageNum = imagesArr.length - 1;
         animate();
-        $(window).trigger('canvasLoaded');
+        console.log('canvasLoaded');
       }
     };
   }
@@ -140,6 +144,7 @@ let canvas = (function() {
     initCanvas();
     $(window).on('resize', ()=>{
       if (!sepiaCanvas) return false;
+      if (isMobile) return false;
       redrawImage();
     });
   }

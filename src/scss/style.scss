@@ -2,7 +2,7 @@
 // will be correctly compiled during `gulp` and `gulp production`
 
 //* Vendors *//
-@import './node_modules/include-media/dist/include-media';
+@import '../vendor_entries/vendor';
 
 @import 'base/main';
 @import 'pages/main',

@@ -1,26 +1,82 @@
 .about {
   display: flex;
   align-items: center;
+  background: #fefffe;
+  @include media('<768px') {
+    padding: 30px;
+  }
 
   .about-inner {
     display: flex;
     justify-content: space-around;
+    align-items: center;
+
+    @include media('<768px') {
+      flex-direction: column;
+    }
+
+    h3 {
+      text-align: center;
+    }
+
+    .phone {
+      a, a:active, a:visited {
+        font-size: 22px;
+        color: $red !important;
+      }
+    }
   }
 
-  .photo {
+  .photo,
+  .photo-wide {
     display: flex;
     align-items: center;
     width: 30%;
     overflow: hidden;
+    @include media('<768px') {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+
     img {
+      filter: grayscale(0.7);
       border-radius: 5%;
+      margin: 0 auto;
     }
   }
-  .text {
+
+  .photo-wide {
+    width: 50%;
+    @include media('<768px') {
+      width: 100%;
+      order: 1;
+    }
+  }
+
+  .text,
+  .text-narrow {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 60%;
     font-size: 20px;
+    overflow-y: auto;
+    min-height: 100%;
+
+    @include media('<768px') {
+      width: 100%;
+      order: 2;
+      font-size: 18px;
+    }
+    @include media('height<800px') {
+      font-size: 18px;
+    }
+  }
+  .text-narrow {
+    width: 40%;
+    @include media('<768px') {
+      width: 100%;
+    }
   }
 }
